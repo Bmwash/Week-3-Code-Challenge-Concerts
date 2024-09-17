@@ -13,21 +13,24 @@ def session():
     return Session()
 
 def test_create_band(session):
-    band = Band(name="Test Band", hometown="Test City")
+    band = Band(name="Sauti soul", hometown="Nairobi")
     session.add(band)
     session.commit()
     assert band in session.query(Band).all()
 
 def test_create_venue(session):
-    venue = Venue(title="Test Venue", city="Test City")
+    venue = Venue(title="Carnivore", city="Nairobi")
     session.add(venue)
     session.commit()
     assert venue in session.query(Venue).all()
 
 def test_create_concert(session):
-    band = Band(name="Test Band", hometown="Test City")
-    venue = Venue(title="Test Venue", city="Test City")
+    band = Band(name="Sauti soul", hometown="Nairobi")
+    venue = Venue(title="Carnivore", city="Nairobi")
+    session.add_all([band, venue])
+    session.commit()
     concert = Concert(date="2024-10-10", band=band, venue=venue)
     session.add_all([band, venue, concert])
     session.commit()
     assert concert in session.query(Concert).all()
+    
